@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if message %}
+    {{message}}
+{% endif %}
+<div class="container">
+    <form action="{% url 'create' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="submit" value="Submit">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h1>All Posts</h1>
+    {% if user.is_authenticated %}
+        <div class="row border border-secondary">
+            <div class="col-md-8 offset-md-2">
+                <h2>New Post</h2>
+            </div>
+            <div class="col-md-8 offset-md-2">
+                <form  action="{% url 'newPost' %}" method="POST">
+                    {% csrf_token %}
+                    <textarea  placeholder="What are you thinking? Post it" name="text" cols="50" rows="10"></textarea>
+                    <br>
+                    <input type="submit" name="submit" value="Post" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

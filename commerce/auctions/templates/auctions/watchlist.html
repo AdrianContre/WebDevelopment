@@ -1,0 +1,24 @@
+{% extends "auctions/layout.html" %} 
+
+{% block body %} 
+    <h1>Lists on your WatchList:</h1>
+    <div class="row mx-3">
+        {% for list in watchlist %}
+             <div class="card mx-3" style="width: 18rem;">
+                {% if list.url %}
+                    <img class="card-img-top" src="{{ list.url }}" alt="{{ list.title }} image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{list.title}}</h5>
+                    <p class="card-text">{{list.description}}</p>
+                    <p class="card-text">CurrentPrice: {{list.actualBid}}€</p>
+                    <a href="{% url 'listing' id=list.id %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+             
+            {% empty  %} 
+                <p>Your watchList is empty, go to <a href="{% url 'index' %}">active listings</a> and add whatever you want!!</p>
+            {% endfor %}
+    </div>
+    
+{% endblock %}

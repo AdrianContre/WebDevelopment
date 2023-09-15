@@ -1,0 +1,36 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    <form method="post" action="{% url 'listCategory' %}">
+        {% csrf_token %} 
+        <label for="category">Select a category:</label>
+
+        <select name="category" id="category">
+            {% for cat in categories %} 
+                <option value="{{cat}}"> {{cat}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+    <div class="row mx-3">
+        {% for list in activeListings %}
+             <div class="card mx-3" style="width: 18rem;">
+                {% if list.url %}
+                    <img class="card-img-top" src="{{ list.url }}" alt="{{ list.title }} image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{list.title}}</h5>
+                    <p class="card-text">{{list.description}}</p>
+                    <p class="card-text">CurrentPrice: {{list.actualBid}}€</p>
+                    <p class="card-text">Category: <a href="{% url 'clickCategory' type=list.category.type %}">{{list.category.type}}</a></p>
+                    <a href="{% url 'listing' id=list.id %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+            {% endfor %} 
+    </div>
+    {% if empty %}  
+        No active Listings,create one!!
+    {% endif %}
+      
+{% endblock %}

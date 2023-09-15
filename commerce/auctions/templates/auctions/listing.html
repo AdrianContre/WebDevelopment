@@ -1,0 +1,83 @@
+{% extends "auctions/layout.html" %}
+
+    {% block body %}
+    {% if message %} 
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+    {% endif %}
+    <h2>Listing:{{auction.title}}</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            {% if user.is_authenticated %}
+                {% if presence %}
+                    <form action="{% url 'remove' id=auction.id %}" method="post"> 
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm" name="Remove"> Remove to Watchlist</a>
+                    </form>
+                {% else %} 
+                    <form action="{% url 'add' id=auction.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm" name="Add"> Add to Watchlist</button>
+                    </form>
+                {% endif %}
+            {% endif %} 
+        </div>
+        <div class="col-lg-6 d-flex justify-content-end">
+            {% if user == auction.owner %}  
+                <form action="{% url 'closeList' id=auction.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary btn-sm" name="close">Close Bid</button>
+                </form>  
+            {% endif %}
+        </div> 
+    </div>
+    <br>
+    <div class="image-container">
+        <img src="{{auction.url}}" class="img-fluid">
+    </div>
+    <p>{{auction.description}}</p>
+    <h3>{{auction.actualBid}}€</h3>
+    {% if bids == 0 %} 
+        <p>There are no bids</p>
+    {% else %} 
+        {% if user == auction.lastOferrer %} 
+            <p>{{bids}} bid(s) so far. Your bid is the current bid</p>
+        {% else %}
+            <p>{{bids}} bid(s) so far.</p>
+        {% endif %}
+    {% endif %}
+    {% if user != auction.owner %}
+        <form action="{% url 'placeBid' id=auction.id %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <p>
+                    <input type="float" placeholder="Bid" name="bidNumber">
+                <p>
+                <p>
+                    <input type="submit" name="placeBid" value="placeBid" class="btn btn-primary">
+                <p>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    <!--Comment section-->
+    <div>
+        <ul class="list-group">
+            {%for comment in comments %}
+                <li class="list-group-item">{{comment.body}} <br> <strong>Posted by {{comment.poster}}</strong></li>
+            {% endfor %}
+        </ul>  
+                 
+    </div>
+
+    {% if user != auction.owner %}
+    <div>
+        <form action="{% url 'comments' id=auction.id %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="comment" placeholder="Write your comment here" style="width: 200px;">
+            <input type="submit" value="Post" name="Post" class="btn btn-warning">
+        </form>
+    </div>
+    {% endif %}  
+{% endblock %}

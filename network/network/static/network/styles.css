@@ -1,0 +1,16 @@
+.card {
+    max-width: 400px; /* Tamaño máximo de la tarjeta */
+    margin: 0 auto; /* Centrar horizontalmente las tarjetas */
+  }
+
+  .row {
+    margin-left: 0; /* Eliminar el margen izquierdo */
+    margin-right: 0; /* Eliminar el margen derecho */
+  }
+
+  .fas.fa-heart {
+    color: red;
+}
+
+
+

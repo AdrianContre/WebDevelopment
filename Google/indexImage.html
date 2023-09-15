@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <title>Google Images</title>
+        <style>
+            .google-logo span:nth-child(1) { color: #4285F4; }
+            .google-logo span:nth-child(2) { color: #DB4437; }
+            .google-logo span:nth-child(3) { color: #F4B400; }
+            .google-logo span:nth-child(4) { color: #4285F4; }
+            .google-logo span:nth-child(5) { color: #0F9D58; }
+            .google-logo span:nth-child(6) { color: #DB4437; }
+            #Titulo {
+                text-align:center;
+                font-size: 100px
+            }
+            .no-spacing{
+                letter-spacing: -0.25em;
+            }
+            .containerLinks {
+               position:absolute;
+               top: 20px;
+               right: 20px;
+            }
+            .containerForm {
+                width: 400px;
+                margin: auto;
+                text-align: center;
+            }
+            .textSubmit {
+                width:400px;
+                height: 30px;
+                border-radius: 10px;
+                margin-bottom: 10px;
+            }
+
+            .SubmitButton {
+                display: block;
+                margin: auto;
+            }
+          </style>
+    </head>
+    <body>
+        <h1 id="Titulo" class="google-logo">
+            <span class="no-spacing">G</span>
+            <span class="no-spacing">o</span>
+            <span class="no-spacing">o</span>
+            <span class="no-spacing">g</span>
+            <span class="no-spacing">l</span>
+            <span class="no-spacing">e</span>
+        </h1>
+        <form class="containerForm" action="https://www.google.com/search">
+            <input type="text"  class="textSubmit" name="q">
+            <input type="hidden" name="tbm" value="isch">
+            <input type="submit" class="SubmitButton" value="Search Image">
+        </form>
+        <div class="containerLinks">
+            <a href="index.html">Back</a>
+        </div>
+        
+    </body>
+</html>
+
+
+
+
